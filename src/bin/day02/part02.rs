@@ -1,7 +1,7 @@
 use anyhow::Result;
 
 pub fn process(input: &str) -> Result<i64> {
-    let result = input
+    let result: i64 = input
         .split(",")
         .map(|range| {
             let (from, to) = range.split_once("-").unwrap();
@@ -17,8 +17,9 @@ pub fn process(input: &str) -> Result<i64> {
 
                 for c in string_num.chars() {
                     buf.push(c);
-                    if buf == string_num {
-                        continue;
+                    if buf == string_num || buf.len() > string_num.len() / 2 {
+                        // println!("Can't be anymore");
+                        break;
                     }
                     let v: Vec<&str> = string_num.split(&buf).collect();
                     if v.len() >= 2 {
